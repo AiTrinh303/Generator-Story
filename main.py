@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from core.config import settings
 
-
 app = FastAPI(
     title = "StoryAI",
     description="AI creates your story.",
@@ -10,7 +9,6 @@ app = FastAPI(
     docs_url="/docs",
     redoc_url="/redoc"
 )
-
 
 app.add_middleware(
     CORSMiddleware,
