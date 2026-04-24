@@ -12,9 +12,9 @@ If `uv` is not installed, run:
 pip install uv
 
 ## 2. Steps to Run
-Step 1: Navigate to the backend folder
+- Step 1: Navigate to the backend folder
 cd backend/
-Step 2: Start the application
+- Step 2: Start the application
 uv run main.py
 
 ## 3.Access the Application
