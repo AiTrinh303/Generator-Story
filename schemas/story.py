@@ -7,12 +7,12 @@ class StoryOptionSchema(BaseModel):
     node_id: Optional[int] = None
 
 
-class StoryNodeBBase(BaseModel):
+class StoryNodeBase(BaseModel):
     content: str
     is_ending: bool = False
     is_winning_ending: bool = False    
 
-class CompleteStoryNodeResponse(StoryNodeBBase):
+class CompleteStoryNodeResponse(StoryNodeBase):
     id: int
     options: List[StoryOptionSchema] = []
 
@@ -25,6 +25,11 @@ class StoryBase(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class CreateStoryRequest(BaseModel):
+    theme: str
+
 
 class CompleteStoryResponse(StoryBase):
     id: int

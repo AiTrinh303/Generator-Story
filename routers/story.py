@@ -11,7 +11,7 @@ from schemas.story import (
     CompleteStoryResponse, CompleteStoryNodeResponse, CreateStoryRequest
 )
 from schemas.job import StoryJobResponse
-from core.story_generator import StoryGenerator
+# from core.story_generator import StoryGenerator
 
 router = APIRouter(
     prefix="/stories",
