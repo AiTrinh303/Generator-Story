@@ -44,7 +44,13 @@ def create_story(
     db.add(job)
     db.commit()
 
-    # TODO : add background task to generate story
+    # TODO : add background task to generate 
+    background_tasks.add_task(
+        generate_story_task,
+        job_id=job_id,
+        theme=request.theme,
+        session_id=session_id
+    )
 
     return job
 
@@ -60,10 +66,8 @@ def generate_story_task(job_id: str, theme: str, session_id: str):
         try:
             job.status = "processing"
             db.commit()
-
-            story = {}
-
-            job.story_id = story.id 
+            story = {} # TODO : generate story based on theme 
+            job.story_id = 1 # TODO : update story_id after story is created
             job.status = "completed"
             job.completed_at = datetime.now()
             db.commit()
@@ -80,7 +84,7 @@ def get_complete_story(story_id: int, db: Session = Depends(get_db)):
     story = db.query(Story).filter(Story.id == story_id).first()
     if not story:
         raise HTTPException(status_code=404, detail="Story not found")
-    
+    # TODO: parse story
     complete_story = build_complete_story_tree(db, story)
     return complete_story
 
