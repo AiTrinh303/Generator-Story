@@ -23,3 +23,7 @@ After the server starts, open your browser and go to:
 - ReDoc: http://localhost:8000/redoc
 
 - Docs: http://localhost:8000/docs
+
+
+### Reference:
+- https://github.com/dan1471/FREE-openai-api-keys
