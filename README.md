@@ -21,3 +21,4 @@ uv run main.py
 After the server starts, open your browser and go to:
 
 ReDoc: http://localhost:8000/redoc
+Docs: http://localhost:8000/docs
