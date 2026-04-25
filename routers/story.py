@@ -11,7 +11,6 @@ from schemas.story import (
     CompleteStoryResponse, CompleteStoryNodeResponse, CreateStoryRequest
 )
 from schemas.job import StoryJobResponse
-# from core.story_generator import StoryGenerator
 
 router = APIRouter(
     prefix="/stories",
@@ -45,12 +44,7 @@ def create_story(
     db.add(job)
     db.commit()
 
-    background_tasks.add_task(
-        generate_story_task,
-        job_id=job_id,
-        theme=request.theme,
-        session_id=session_id
-    )
+    # TODO : add background task to generate story
 
     return job
 
@@ -67,7 +61,7 @@ def generate_story_task(job_id: str, theme: str, session_id: str):
             job.status = "processing"
             db.commit()
 
-            story = StoryGenerator.generate_story(db, session_id, theme)
+            story = {}
 
             job.story_id = story.id 
             job.status = "completed"
