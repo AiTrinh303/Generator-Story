@@ -6,11 +6,17 @@ class Settings(BaseSettings):
     API_PREFIX: str = "/api"
     DEBUG: bool = False
 
-    DATABASE_URL: str 
+    DATABASE_URL: str = "sqlite:///./backend.db"
 
-    ALLOWED_ORIGINS: str = ""
+    ALLOWED_ORIGINS: str = "*"
 
-    OPENAI_API_KEY: str
+    OPENAI_API_KEY: str | None = None
+
+    @field_validator("DEBUG", mode="before")
+    def parse_debug(cls, v):
+        if isinstance(v, str):
+            return v.lower() not in ("false", "0", "no", "off")
+        return bool(v)
 
     @field_validator("ALLOWED_ORIGINS")
     def parse_allowed_origins(cls, v: str) -> List[str]:

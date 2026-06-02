@@ -7,7 +7,11 @@
 
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.sql import func
-from db.database import Base
+
+try:
+    from backend.db.database import Base
+except ImportError:
+    from db.database import Base
 
 class StoryJob(Base):
     __tablename__ = "story_jobs"

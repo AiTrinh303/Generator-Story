@@ -1,14 +1,19 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from core.config import settings
-from routers import story, job
-from db.database import create_tables
+try:
+    from backend.core.config import settings
+    from backend.routers import story, job
+    from backend.db.database import create_tables
+except ImportError:
+    from core.config import settings
+    from routers import story, job
+    from db.database import create_tables
 
 create_tables()
 
 app = FastAPI(
-    title = "StoryAI",
+    title="StoryAI",
     description="AI creates your story.",
     version="1.0.0",
     docs_url="/docs",
@@ -28,4 +33,4 @@ app.include_router(job.router, prefix=settings.API_PREFIX)
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)

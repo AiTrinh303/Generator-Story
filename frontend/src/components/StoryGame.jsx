@@ -16,11 +16,20 @@ function StoryGame({story, onNewStory}) {
 
     useEffect(() => {
         if (currentNodeId && story && story.all_nodes) {
-            const node = story.all_nodes[currentNodeId]
+            const nodeKey = String(currentNodeId)
+            const node = story.all_nodes[nodeKey] || story.all_nodes[currentNodeId]
+
+            if (!node) {
+                setCurrentNode(null)
+                setOptions([])
+                setIsEnding(false)
+                setIsWinningEnding(false)
+                return
+            }
 
             setCurrentNode(node)
             setIsEnding(node.is_ending)
-            setIsWinningEnding(node.is_winning_endig)
+            setIsWinningEnding(node.is_winning_ending)
 
             if (!node.is_ending && node.options && node.options.length > 0) {
                 setOptions(node.options)
@@ -44,6 +53,9 @@ function StoryGame({story, onNewStory}) {
     return <div className="story-game">
         <header className="story-header">
             <h2>{story.title}</h2>
+            <p className="story-title-subtitle">
+                A gentle interactive story with kind choices and a warm ending.
+            </p>
         </header>
 
         <div className="story-content">
@@ -53,7 +65,9 @@ function StoryGame({story, onNewStory}) {
                 {isEnding ?
                     <div className="story-ending">
                         <h3>{isWinningEnding ? "Congratulations" : "The End"}</h3>
-                        {isWinningEnding ? "You reached a winning ending" : "Your adventure has ended."}
+                        <p className={isWinningEnding ? "winning-message" : "ending-message"}>
+                            {isWinningEnding ? "You reached a winning ending with a happy heart." : "Your adventure has ended with a gentle finish."}
+                        </p>
                     </div>
                     :
                     <div className="story-options">

@@ -95,7 +95,12 @@ function StoryGenerator() {
 
         {!jobId && !error && !loading && <ThemeInput onSubmit={generateStory}/>}
 
-        {loading && <LoadingStatus theme={theme} />}
+        {jobId && loading && <LoadingStatus theme={theme} />}
+
+        {jobId && !loading && !error && jobStatus && <div className="job-status">
+            <p>Story generation status: <strong>{jobStatus}</strong></p>
+            <button onClick={reset} className="reset-btn">Create a new story</button>
+        </div>}
     </div>
 }
 

@@ -260,6 +260,12 @@ button:hover {
   color: var(--primary-color);
 }
 
+.story-title-subtitle {
+  color: #666;
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+}
+
 .story-content {
   margin-bottom: 2rem;
 }
